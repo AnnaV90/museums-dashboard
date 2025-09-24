@@ -1,0 +1,11 @@
+wikipedia
+pandas
+numpy
+requests
+pycountry
+fuzzywuzzy
+scikit-learn
+lxml
+python-Levenshtein
+fastapi
+uvicorn
