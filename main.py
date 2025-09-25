@@ -111,6 +111,14 @@ def get_museum_dataframe():
                    for _, row in data.iterrows()]
     data["Population"] = populations
     data = data.dropna(subset=["Population", "Visitors in 2024"])
+    data["ratio"] = data["Visitors in 2024"] / data["Population"]
+    Q1 = data["ratio"].quantile(0.25)
+    Q3 = data["ratio"].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    data = data[(data["ratio"] >= lower_bound) & (data["ratio"] <= upper_bound)]
+    data = data.reset_index(drop=True)
     return data
 
 
